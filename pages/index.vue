@@ -3,36 +3,17 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <section class="featured-posts">
-      <post-preview 
-        id="1"
-        title="Hello there!"
-        previewText="This is my first post"
-        thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
-      />
-      <post-preview 
-        id="2"
-        title="Hello there again!"
-        previewText="This is my second post"
-        thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
-      />
-      <post-preview 
-        id="3"
-        title="Hello there!"
-        previewText="This is my third post"
-        thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
-      />
-    </section>
+    <post-list />
   </div>
 </template>
 
 <script>
-import PostPreview from '@/components/Posts/PostPreview.vue';
+import PostList from '@/components/Posts/PostList.vue';
 
 export default {
   name: 'index',
   components: {
-    PostPreview,
+    PostList,
   },
 }
 </script>
@@ -67,14 +48,5 @@ export default {
   .intro h1 {
     font-size: 2rem;
   }
-}
-
-.featured-posts {
-  display: flex;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 </style>
