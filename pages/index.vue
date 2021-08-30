@@ -3,7 +3,7 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <post-list />
+    <post-list :posts="loadedPosts" />
   </div>
 </template>
 
@@ -14,6 +14,48 @@ export default {
   name: 'index',
   components: {
     PostList,
+  },
+  async asyncData() {
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        const data = [
+          { 
+            id: '1',
+            title: 'First post',
+            previewText: 'This is my first post',
+            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
+          },
+          { 
+            id: '2',
+            title: 'Second post and code review',
+            previewText: 'This is my second post',
+            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
+          },
+        ];
+        resolve(data);
+      }, 4000); 
+    });
+
+    return { loadedPosts: result };
+
+    // setTimeout(() => {
+    //   callback(null, {
+    //     loadedPosts: [
+    //       { 
+    //         id: '1',
+    //         title: 'First post',
+    //         previewText: 'This is my first post',
+    //         thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
+    //       },
+    //       { 
+    //         id: '2',
+    //         title: 'Second post',
+    //         previewText: 'This is my second post',
+    //         thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
+    //       },
+    //     ],
+    //   });
+    // }, 5000);
   },
 }
 </script>

@@ -1,25 +1,12 @@
 <template>
   <section class="post-list">
-    <post-preview
+    <post-preview v-for="post in posts"
+      :key="post.id"
+      :id="post.id"
+      :title="post.title"
+      :previewText="post.previewText"
+      :thumbnail="post.thumbnail"  
       :isAdmin="isAdmin" 
-      id="1"
-      title="Hello there!"
-      previewText="This is my first post"
-      thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
-    />
-    <post-preview
-      :isAdmin="isAdmin" 
-      id="2"
-      title="Hello there again!"
-      previewText="This is my second post"
-      thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
-    />
-    <post-preview
-      :isAdmin="isAdmin" 
-      id="3"
-      title="Hello there!"
-      previewText="This is my third post"
-      thumbnail="https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg"  
     />
   </section>
 </template>
@@ -35,6 +22,10 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
     }
   }
 }
