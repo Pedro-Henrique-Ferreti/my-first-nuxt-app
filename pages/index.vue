@@ -15,9 +15,11 @@ export default {
   components: {
     PostList,
   },
-  async asyncData() {
+  async asyncData(context) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
+
+        // context.error(new Error('Promise error!'));
         const data = [
           { 
             id: '1',
