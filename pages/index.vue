@@ -15,50 +15,6 @@ export default {
   components: {
     PostList,
   },
-  async fetch(context) {
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-
-        // context.error(new Error('Promise error!'));
-        const data = [
-          { 
-            id: '1',
-            title: 'First post',
-            previewText: 'This is my first post',
-            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-          },
-          { 
-            id: '2',
-            title: 'Second post and code review',
-            previewText: 'This is my second post',
-            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-          },
-        ];
-        resolve(data);
-      }, 4000); 
-    });
-
-    context.store.dispatch('setPosts', result);
-
-    // setTimeout(() => {
-    //   callback(null, {
-    //     loadedPosts: [
-    //       { 
-    //         id: '1',
-    //         title: 'First post',
-    //         previewText: 'This is my first post',
-    //         thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-    //       },
-    //       { 
-    //         id: '2',
-    //         title: 'Second post',
-    //         previewText: 'This is my second post',
-    //         thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-    //       },
-    //     ],
-    //   });
-    // }, 5000);
-  },
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts;

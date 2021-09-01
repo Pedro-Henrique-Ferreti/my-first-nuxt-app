@@ -12,31 +12,10 @@ export default {
   components: {
     PostList,
   },
-  async asyncData() {
-    const response = await new Promise(resolve => {
-      setTimeout(() => {
-        const data = [
-          { 
-            id: '1',
-            title: 'First post',
-            previewText: 'This is my first post',
-            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-          },
-          { 
-            id: '2',
-            title: 'Second post and code review',
-            previewText: 'This is my second post',
-            thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg'
-          },
-        ];
-
-        resolve(data);
-      }, 3000);
-    });
-
-    return {
-      loadedPosts: response,
-    };
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
 }
 </script>
