@@ -15,7 +15,7 @@ export default {
   components: {
     PostList,
   },
-  async asyncData(context) {
+  async fetch(context) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
 
@@ -38,7 +38,7 @@ export default {
       }, 4000); 
     });
 
-    return { loadedPosts: result };
+    context.store.dispatch('setPosts', result);
 
     // setTimeout(() => {
     //   callback(null, {
@@ -59,8 +59,10 @@ export default {
     //   });
     // }, 5000);
   },
-  mounted() {
-    this.$store.dispatch('setPosts', this.loadedPosts);
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts;
+    }
   }
 }
 </script>
