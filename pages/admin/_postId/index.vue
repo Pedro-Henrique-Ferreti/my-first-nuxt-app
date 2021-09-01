@@ -29,11 +29,13 @@ export default {
   },
   methods: {
     onSubimitted(editedPost) {
-      axios.put(
-        `https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`,
-        editedPost
-      )
-      .then(res => this.$router.push('/admin'));
+      this.$store.dispatch('editPost', {
+        ...editedPost,
+        id: this.$route.params.postId
+      })
+      .then(() => {
+        this.$router.push('/admin');
+      });
     }
   }
 }
