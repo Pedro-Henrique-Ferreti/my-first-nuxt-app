@@ -1,18 +1,26 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <admin-post-form />
+      <admin-post-form @submit="onSubmited" />
     </section>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import AdminPostForm from '@/components/Admin/AdminPostForm.vue';
 
 export default {
   layout: 'admin',
   components: {
     AdminPostForm,
+  },
+  methods: {
+    onSubmited(postData) {
+      axios.post('https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts.json', postData)
+      .then(result => console.log(result))
+      .catch(error => console.log(error));
+    }
   },
 }
 </script>
