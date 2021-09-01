@@ -15,24 +15,24 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   async asyncData(context) {
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          id: '1',
-          title: `First Post with ID: ${context.params.id}`,
-          author: 'Pedro Henrique',
-          updatedDate: new Date().getFullYear(),
-          content: 'This is my first post! I hope you like it.',
-          thumbnail: 'https://ibe.edu.br/wp-content/uploads/2019/12/big-tech.jpg',
-        });
-      }, 3000);
-    });
 
-    return {
-      loadedPost: result,
+    try {
+      const { data } = await axios.get(
+        `https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts/${context.params.id}.json`
+      );
+
+      return {
+        loadedPost: data,
+      }
     }
+    catch (error) {
+      context.error(error);
+    }
+
+    
   },
 }
 </script>
