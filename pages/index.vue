@@ -59,6 +59,9 @@ export default {
     //   });
     // }, 5000);
   },
+  mounted() {
+    this.$store.dispatch('setPosts', this.loadedPosts);
+  }
 }
 </script>
 
