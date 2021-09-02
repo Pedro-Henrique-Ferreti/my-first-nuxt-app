@@ -1,14 +1,14 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'my-first-nuxt-app',
+    title: 'WD Blog',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'My first Nuxt.js project' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -21,6 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@assets/styles/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -42,6 +43,15 @@ export default {
   build: {
   },
   loading: {
-    color: 'blueviolet'
+    color: 'blueviolet',
+    height: '7px',
+    duration: 6000
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-1fa23-default-rtdb.firebaseio.com',
+  },
+  pageTransition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }

@@ -25,7 +25,7 @@ export const mutations = {
 
 export const actions = {
   loadPosts(context, payload) {
-    return axios.get('https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts.json')
+    return axios.get(process.env.baseUrl + '/posts.json')
     .then(response => {
       const posts = [];
 
@@ -42,7 +42,7 @@ export const actions = {
     .catch(error => console.log(error));
   },
   addPost(context, postData) {
-    return axios.post('https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts.json', postData)
+    return axios.post(process.env.baseUrl + '/posts.json', postData)
     .then(result => {
       context.commit('addPost', { ...postData, id: result.data.name });
     })
@@ -50,7 +50,7 @@ export const actions = {
   },
   editPost(context, editedPost) {
     return axios.put(
-      `https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts/${editedPost.id}.json`,
+      `${process.env.baseUrl}/posts/${editedPost.id}.json`,
       editedPost
     )
     .then(res => {

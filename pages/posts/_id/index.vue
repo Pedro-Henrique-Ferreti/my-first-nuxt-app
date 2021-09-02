@@ -16,9 +16,12 @@
 
 <script>
 import axios from 'axios';
-export default {
-  async asyncData(context) {
 
+export default {
+  head: {
+    title: 'A blog post',
+  },
+  async asyncData(context) {
     try {
       const { data } = await axios.get(
         `https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts/${context.params.id}.json`
@@ -30,9 +33,7 @@ export default {
     }
     catch (error) {
       context.error(error);
-    }
-
-    
+    }    
   },
 }
 </script>
