@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onSubimitted(editedPost) {
-      this.$store.dispatch('editPost', {
+      this.$store.dispatch('posts/editPost', {
         ...editedPost,
         id: this.$route.params.postId
       })
