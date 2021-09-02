@@ -29,8 +29,6 @@ export const actions = {
     .then(response => {
       const posts = [];
 
-      console.log(response.data);
-
       Object.keys(response.data).forEach(key => {
         const post = response.data[key];
         posts.push({
