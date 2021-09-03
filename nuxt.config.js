@@ -39,14 +39,19 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://nuxt-blog-1fa23-default-rtdb.firebaseio.com',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
   loading: {
-    color: 'blueviolet',
-    height: '7px',
+    color: 'orange',
+    height: '4px',
     duration: 6000
   },
   env: {

@@ -25,12 +25,12 @@ export const mutations = {
 
 export const actions = {
   loadPosts(context, payload) {
-    return axios.get(process.env.baseUrl + '/posts.json')
-    .then(response => {
+    return this.$axios.$get('/posts.json')
+    .then(data => {
       const posts = [];
 
-      Object.keys(response.data).forEach(key => {
-        const post = response.data[key];
+      Object.keys(data).forEach(key => {
+        const post = data[key];
         posts.push({
           id: key,
           ...post,
@@ -42,19 +42,19 @@ export const actions = {
     .catch(error => console.log(error));
   },
   addPost(context, postData) {
-    return axios.post(process.env.baseUrl + '/posts.json', postData)
-    .then(result => {
-      context.commit('addPost', { ...postData, id: result.data.name });
+    return this.$axios.$post('/posts.json', postData)
+    .then(data => {
+      context.commit('addPost', { ...postData, id: data.name });
     })
     .catch(error => console.log(error));
   },
   editPost(context, editedPost) {
-    return axios.put(
-      `${process.env.baseUrl}/posts/${editedPost.id}.json`,
+    return this.$axios.$put(
+      `/posts/${editedPost.id}.json`,
       editedPost
     )
-    .then(res => {
-      context.commit('editPost', res.data);
+    .then(data => {
+      context.commit('editPost', data);
     });
     
   },

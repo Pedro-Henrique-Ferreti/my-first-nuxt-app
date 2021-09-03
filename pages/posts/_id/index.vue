@@ -15,16 +15,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   head: {
     title: 'A blog post',
   },
   async asyncData(context) {
     try {
-      const { data } = await axios.get(
-        `https://nuxt-blog-1fa23-default-rtdb.firebaseio.com/posts/${context.params.id}.json`
+      const data = await context.app.$axios.$get(
+        `/posts/${context.params.id}.json`
       );
 
       return {
