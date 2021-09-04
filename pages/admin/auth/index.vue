@@ -1,15 +1,15 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
-      <form>
-        <AppControlInput type="email">E-Mail Address</AppControlInput>
-        <AppControlInput type="password">Password</AppControlInput>
-        <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
-        <AppButton
+      <form @submit.prevent="onSubmit">
+        <app-control-input type="email" v-model="email">E-Mail Address</app-control-input>
+        <app-control-input type="password" v-model="password">Password</app-control-input>
+        <app-button type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</app-button>
+        <app-button
           type="button"
           btn-style="inverted"
           style="margin-left: 10px"
-          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</app-button>
       </form>
     </div>
   </div>
@@ -21,7 +21,50 @@ export default {
   layout: 'admin',
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    onSubmit() {
+      if (this.isLogin) {
+        this.login();
+      } else {
+        this.signUp();
+      }
+    },
+    signUp() {
+      this.$axios.$post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.fbApiKey,
+        {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true,
+        }
+      )
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    login() {
+      this.$axios.$post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.fbApiKey,
+        {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true,
+        }
+      )
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
   }
 }

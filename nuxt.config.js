@@ -56,6 +56,7 @@ export default {
   },
   env: {
     baseUrl: process.env.BASE_URL || 'https://nuxt-blog-1fa23-default-rtdb.firebaseio.com',
+    fbApiKey: 'AIzaSyDMs1TjCAeYOFUotXQakaXkFI8GEXIA2sY'
   },
   pageTransition: {
     name: 'fade',
