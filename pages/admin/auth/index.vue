@@ -28,44 +28,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (this.isLogin) {
-        this.login();
-      } else {
-        this.signUp();
-      }
-    },
-    signUp() {
-      this.$axios.$post(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.fbApiKey,
-        {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true,
-        }
-      )
-      .then(result => {
-        console.log(result);
+      this.$store.dispatch('auth/authenticateUser', {
+        isLogin: this.isLogin,
+        email: this.email,
+        password: this.password,
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(() => this.$router.push('/admin'));
     },
-    login() {
-      this.$axios.$post(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.fbApiKey,
-        {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true,
-        }
-      )
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }
   }
 }
 </script>

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const state = () => ({
   loadedPosts: []
 });
@@ -42,7 +40,7 @@ export const actions = {
     .catch(error => console.log(error));
   },
   addPost(context, postData) {
-    return this.$axios.$post('/posts.json', postData)
+    return this.$axios.$post(`/posts.json?auth=${context.rootGetters['auth/token']}`, postData)
     .then(data => {
       context.commit('addPost', { ...postData, id: data.name });
     })
@@ -50,7 +48,7 @@ export const actions = {
   },
   editPost(context, editedPost) {
     return this.$axios.$put(
-      `/posts/${editedPost.id}.json`,
+      `/posts/${editedPost.id}.json?auth=${context.rootGetters['auth/token']}`,
       editedPost
     )
     .then(data => {
