@@ -70,10 +70,19 @@ export const actions = {
       expirationDate = localStorage.getItem('tokenExpiration');
     }
     if (new Date().getTime() > +expirationDate || !token) {
-      context.commit('clearToken');
+      context.dispatch('logout');
       return 
     }
 
     context.commit('setToken', token);
+  },
+  logout(context) {
+    context.commit('clearToken');
+    Cookie.remove('token');
+    Cookie.remove('expirationDate');
+    if (process.client) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('tokenExpiration');
+    }
   }
 }
