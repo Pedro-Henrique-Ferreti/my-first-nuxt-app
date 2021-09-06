@@ -5,7 +5,10 @@ export const state = () => ({
 export const getters = {
   token(state) {
     return state.token;
-  }
+  },
+  isAuthenticated(state) {
+    return state.token !== null;
+  },
 };
 
 export const mutations = {
