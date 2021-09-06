@@ -16,8 +16,10 @@
 
 <script>
 export default {
-  head: {
-    title: 'A blog post',
+  head() {
+    return {
+      title: 'Blog | ' + this.loadedPost.title,
+    };
   },
   async asyncData(context) {
     try {
