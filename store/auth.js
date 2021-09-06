@@ -15,6 +15,9 @@ export const mutations = {
   setToken(state, token) {
     state.token = token;
   },
+  clearToken(state) {
+    state.token = null;
+  }
 };
 
 export const actions = {
@@ -33,9 +36,27 @@ export const actions = {
     )
     .then(result => {
       context.commit('setToken', result.idToken);
+      localStorage.setItem('token', result.idToken);
+      localStorage.setItem('tokenExpiration', new Date().getTime() + result.expiresIn * 1000);
+      context.dispatch('setLogoutTimer', result.expiresIn * 1000);
     })
     .catch(error => {
       console.log(error);
     });
+  },
+  setLogoutTimer(context, duration) {
+    setTimeout(() => context.commit('clearToken'), duration);
+  },
+  initAuth(context) {
+    const token = localStorage.getItem('token');
+    const expirationDate = localStorage.getItem('tokenExpiration');
+
+    if (new Date().getTime() > +expirationDate || !token) {
+      return 
+    }
+
+    context.dispatch('setLogoutTimer', +expirationDate - new Date().getTime());
+
+    context.commit('setToken', token);
   }
 }
