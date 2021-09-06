@@ -1,3 +1,5 @@
+const bodyParser = require('body-parser');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -49,17 +51,25 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
+
   loading: {
     color: 'orange',
     height: '4px',
     duration: 6000
   },
+
   env: {
     baseUrl: process.env.BASE_URL || 'https://nuxt-blog-1fa23-default-rtdb.firebaseio.com',
     fbApiKey: 'AIzaSyDMs1TjCAeYOFUotXQakaXkFI8GEXIA2sY'
   },
+
   pageTransition: {
     name: 'fade',
     mode: 'out-in'
-  }
+  },
+
+  serverMiddleware: [
+    bodyParser.json(),
+    '@/api'
+  ]  
 }
